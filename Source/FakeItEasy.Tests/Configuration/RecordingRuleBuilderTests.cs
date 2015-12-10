@@ -3,6 +3,9 @@ namespace FakeItEasy.Tests.Configuration
     using System;
     using FakeItEasy.Configuration;
     using FakeItEasy.Core;
+
+    using FluentAssertions;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -31,7 +34,7 @@ namespace FakeItEasy.Tests.Configuration
             // Act
 
             // Assert
-            Assert.That(this.rule.IsAssertion, Is.False);
+            this.rule.IsAssertion.Should().BeFalse();
         }
 
         [Test]
@@ -43,7 +46,7 @@ namespace FakeItEasy.Tests.Configuration
             this.builder.MustHaveHappened();
 
             // Assert
-            Assert.That(this.rule.IsAssertion, Is.True);
+            this.rule.IsAssertion.Should().BeTrue();
         }
 
         [Test]
@@ -55,7 +58,7 @@ namespace FakeItEasy.Tests.Configuration
             this.builder.MustHaveHappened();
 
             // Assert
-            Assert.That(this.rule.Applicator, Is.Not.Null);
+            this.rule.Applicator.Should().NotBeNull();
         }
 
         [Test]
@@ -68,7 +71,7 @@ namespace FakeItEasy.Tests.Configuration
             this.builder.MustHaveHappened(repeatPredicate);
 
             // Assert
-            Assert.That(this.rule.RepeatConstraint, Is.SameAs(repeatPredicate));
+            this.rule.RepeatConstraint.Should().BeSameAs(repeatPredicate);
         }
 
         [Test]
@@ -94,7 +97,7 @@ namespace FakeItEasy.Tests.Configuration
             var returned = this.builder.WhenArgumentsMatch(x => true);
 
             // Assert
-            Assert.That(returned, Is.SameAs(this.builder));
+            returned.Should().BeSameAs(this.builder);
         }
 
         [Test]
@@ -121,7 +124,7 @@ namespace FakeItEasy.Tests.Configuration
             var returned = this.builder.DoesNothing();
 
             // Assert
-            Assert.That(returned, Is.SameAs(config));
+            returned.Should().BeSameAs(config);
         }
 
         [Test]
@@ -137,7 +140,7 @@ namespace FakeItEasy.Tests.Configuration
             var returned = this.builder.Throws(exceptionFactory);
 
             // Assert
-            Assert.That(returned, Is.SameAs(config));
+            returned.Should().BeSameAs(config);
         }
 
         [Test]
@@ -153,7 +156,7 @@ namespace FakeItEasy.Tests.Configuration
             var returned = this.builder.Invokes(action);
 
             // Assert
-            Assert.That(returned, Is.SameAs(config));
+            returned.Should().BeSameAs(config);
         }
 
         [Test]
@@ -167,7 +170,7 @@ namespace FakeItEasy.Tests.Configuration
             var returned = this.builder.CallsBaseMethod();
 
             // Assert
-            Assert.That(returned, Is.SameAs(config));
+            returned.Should().BeSameAs(config);
         }
 
         [Test]
@@ -183,7 +186,7 @@ namespace FakeItEasy.Tests.Configuration
             var returned = this.builder.AssignsOutAndRefParametersLazily(valueProducer);
 
             // Assert
-            Assert.That(returned, Is.SameAs(config));
+            returned.Should().BeSameAs(config);
         }
     }
 }

@@ -202,7 +202,7 @@ namespace FakeItEasy.Tests.Configuration
             // Act
 
             // Assert
-            Assert.That(this.rule.IsApplicableTo(A.Dummy<IFakeObjectCall>()), Is.True);
+            this.rule.IsApplicableTo(A.Dummy<IFakeObjectCall>()).Should().BeTrue();
         }
 
         [Test]

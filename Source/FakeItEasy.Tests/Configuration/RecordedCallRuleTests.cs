@@ -3,6 +3,9 @@ namespace FakeItEasy.Tests.Configuration
     using System;
     using FakeItEasy.Configuration;
     using FakeItEasy.Core;
+
+    using FluentAssertions;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -17,7 +20,7 @@ namespace FakeItEasy.Tests.Configuration
 
             rule.UsePredicateToValidateArguments(predicate);
 
-            Assert.That(rule.IsApplicableToArguments, Is.SameAs(predicate));
+            rule.IsApplicableToArguments.Should().BeSameAs(predicate);
         }
 
         [Test]
@@ -30,7 +33,7 @@ namespace FakeItEasy.Tests.Configuration
             // Act
 
             // Assert
-            Assert.That(rule.DescriptionOfValidCall, Is.EqualTo("Recorded call"));
+            rule.DescriptionOfValidCall.Should().Be("Recorded call");
         }
         
         private RecordedCallRule CreateRule()
